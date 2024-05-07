@@ -2,7 +2,7 @@
 from flask import session, flash, redirect, current_app
 from flask import Blueprint, session, redirect, url_for, render_template #request, , , jsonify
 
-#from app.models.login import Login
+from app.models.login import Login
 
 auth_routes = Blueprint("auth_routes", __name__)
 
@@ -48,14 +48,14 @@ def google_oauth_callback():
         # add user info to the session:
         session["current_user"] = user_info
 
-        # consider storing the user login info in the database:
-        #Login.create({
-        #    "email": user_info["email"],
-        #    "verified": user_info["email_verified"],
-        #    "first_name": user_info["given_name"],
-        #    "last_name": user_info["family_name"],
-        #    "profile_photo_url": user_info["picture"],
-        #})
+         consider storing the user login info in the database:
+        Login.create({
+            "email": user_info["email"],
+            "verified": user_info["email_verified"],
+            "first_name": user_info["given_name"],
+            "last_name": user_info["family_name"],
+            "profile_photo_url": user_info["picture"],
+        })
 
     else:
         print("NO USER INFO")
